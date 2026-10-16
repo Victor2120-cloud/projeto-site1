@@ -53,4 +53,40 @@ document.addEventListener("DOMContentLoaded", function() {
         stopSlide();
         startSlide();
     });
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", function() {
+            showSlide(index);
+            stopSlide();
+            startSlide();
+        });
+    });
+    // Inicializa o carrossel
+    showSlide(slideAtual);
+    startSlide();
+
+    //validação do formulário de contato
+    const contatoForm = document.getElementById("contatoForm");
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const mensagem = document.getElementById("mensagem");
+
+
+    contatoForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let isValid = true;
+        if (name.value.trim().length < 3) {
+            isValid = false;
+            showError("Por favor, preencha o campo Nome.");
+        }
+        if(!isEmailValid.value.trim().includes("@")) {
+            isValid = false;
+            showError("Por favor, preencha o campo Email.");
+        }
+        if (mensagem.value.trim().length < 10) {
+            isValid = false;
+            showError("Por favor, preencha o campo Mensagem.");
+        }
+    
+    });    
 });//fechamento do evento carregar página
