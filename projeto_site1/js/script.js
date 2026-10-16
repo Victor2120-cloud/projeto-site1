@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
 
         let isValid = true;
-        if (name.value.trim().length < 3) {
+        if (isNameValid.value.trim().length < 3) {
             isValid = false;
             showError("Por favor, preencha o campo Nome.");
         }
@@ -83,10 +83,28 @@ document.addEventListener("DOMContentLoaded", function() {
             isValid = false;
             showError("Por favor, preencha o campo Email.");
         }
-        if (mensagem.value.trim().length < 10) {
+        if (isMensagemValid.value.trim().length < 10) {
             isValid = false;
-            showError("Por favor, preencha o campo Mensagem.");
+            showError("Por favor, preencha o campo Mensagem com no mínimo 10 caracteres.");
         }
-    
+        if (isValid) {
+            clearError();
+            alert("Formulário enviado com sucesso!");
+            contatoForm.reset();
+        }
+
+        function isEmailValid(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        function showError(inputElement, message) {
+            const formGroup = inputElement.parentElement;
+            clearFieldError(inputElement);
+            const erroMensagem = document.createElement("small");
+            erroMensagem.className = "error-message";
+            erroMensagem.innerText = message;
+            formGroup.appendChild(erroMensagem);
+            inputElement.classList.add("error");
+        }
     });    
 });//fechamento do evento carregar página
